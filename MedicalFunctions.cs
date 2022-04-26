@@ -46,7 +46,7 @@ namespace MedicalSolution
 
         [FunctionName("GetMedicine")]
         public static async Task<IActionResult> GetMedicine(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "task")] HttpRequest req, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "medicine")] HttpRequest req, ILogger log)
         {
             string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             List<MedicalModel> medialmodel = new List<MedicalModel>();
@@ -97,7 +97,7 @@ namespace MedicalSolution
                 using (SqlConnection connection = new SqlConnection(SqlConnectionString))
                 {
                     connection.Open();
-                    var query = @"Select * from MedicineTable Where name like '%@name%'";
+                    var query = @"Select * from MedicineTable Where name like %@name%";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@name", name);
                     SqlDataAdapter da = new SqlDataAdapter(command);
@@ -117,7 +117,7 @@ namespace MedicalSolution
 
         [FunctionName("UpdateMedicine")]
         public static async Task<IActionResult> UpdateMedicine(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "task/{id}")] HttpRequest req, ILogger log, int id)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "medicine/{id}")] HttpRequest req, ILogger log, int id)
         {
             string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
@@ -127,12 +127,11 @@ namespace MedicalSolution
                 using (SqlConnection connection = new SqlConnection(SqlConnectionString))
                 {
                     connection.Open();
-                    var query = @"Update TaskList Set Description = @Description , IsDone = @IsDone Where Id = @Id";
+                    var query = @"Update MedicineTable Set Name = @Name , Count = @Count, Location=@Location, ProviderType=@ProviderType  Where Id = @Id";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Name", input.Name);
                     command.Parameters.AddWithValue("@Count", input.Count);
-                    command.Parameters.AddWithValue("@Location", input.Location);
-                    command.Parameters.AddWithValue("@Count", input.Count);
+                    command.Parameters.AddWithValue("@Location", input.Location);                    
                     command.Parameters.AddWithValue("@ProviderType", input.ProviderType);
                     command.ExecuteNonQuery();
                 }
