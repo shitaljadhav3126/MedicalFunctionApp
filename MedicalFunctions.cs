@@ -97,7 +97,7 @@ namespace MedicalSolution
                 using (SqlConnection connection = new SqlConnection(SqlConnectionString))
                 {
                     connection.Open();
-                    var query = @"Select * from MedicineTable Where name like %@name%";
+                    var query = @"Select * from MedicineTable Where name like '%@name%'";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@name", name);
                     SqlDataAdapter da = new SqlDataAdapter(command);
