@@ -33,7 +33,7 @@ namespace MedicalSolution
                     connection.Open();
                     //if (String.IsNullOrEmpty(input.Name))
                     //{
-                        var query = $"INSERT INTO [MedicineTable] (Name,Count,Location,ProviderType) VALUES('{input.Name}', '{input.Count}' , '{input.Location}' , '{input.ProviderType}')";
+                        var query = $"INSERT INTO [MedicineTable] (Name,Count,Location,ProviderType, StoreName,BatchID) VALUES('{input.Name}', '{input.Count}' , '{input.Location}' , '{input.ProviderType}' , '{input.StoreName}' , '{input.BatchID}')";
                         SqlCommand command = new SqlCommand(query, connection);
                         command.ExecuteNonQuery();
                     //}
@@ -74,7 +74,9 @@ namespace MedicalSolution
                             Name = reader["Name"].ToString(),
                             Count = (int)reader["Count"],
                             Location = reader["Location"].ToString(),
-                            ProviderType = reader["ProviderType"].ToString()
+                            ProviderType = reader["ProviderType"].ToString(),
+                            StoreName = reader["StoreName"].ToString(),
+                            BatchID = reader["BatchID"].ToString(),
                         };
                         medialmodel.Add(task);
                     }
@@ -146,12 +148,14 @@ namespace MedicalSolution
                 using (connection)
                 {
                     connection.Open();
-                    var query = @"Update MedicineTable Set Name = @Name , Count = @Count, Location=@Location, ProviderType=@ProviderType  Where Id = @Id";
+                    var query = @"Update MedicineTable Set Name = @Name , Count = @Count, Location=@Location, ProviderType=@ProviderType, StoreName=@StoreName, BatchID=@BatchID  Where Id = @Id";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Name", input.Name);
                     command.Parameters.AddWithValue("@Count", input.Count);
                     command.Parameters.AddWithValue("@Location", input.Location);                    
                     command.Parameters.AddWithValue("@ProviderType", input.ProviderType);
+                    command.Parameters.AddWithValue("@StoreName", input.StoreName);
+                    command.Parameters.AddWithValue("@BatchID", input.BatchID);
                     command.ExecuteNonQuery();
                 }
             }

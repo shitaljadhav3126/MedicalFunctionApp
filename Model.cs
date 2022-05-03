@@ -11,6 +11,8 @@ namespace MedicalSolution
         public int Count { get; set; }
         public string Location { get; set; }
         public string ProviderType { get; set; }
+        public string StoreName {get; set;}
+        public string BatchID {get; set;}
     }
     public class CreateModel
     {
@@ -18,6 +20,8 @@ namespace MedicalSolution
         public int Count { get; set; }
         public string Location { get; set; }
         public string ProviderType { get; set; }
+        public string StoreName {get; set;}
+        public string BatchID {get; set;}
     }
     public class UpdateModel
     {
@@ -25,5 +29,7 @@ namespace MedicalSolution
         public int Count { get; set; }
         public string Location { get; set; }
         public string ProviderType { get; set; }
+        public string StoreName {get; set;}
+        public string BatchID {get; set;}
     }
 }
