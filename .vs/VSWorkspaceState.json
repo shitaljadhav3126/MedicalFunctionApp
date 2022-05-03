@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\bin\\Release",
+    "\\bin\\Release\\netcoreapp3.1",
+    "\\bin\\Release\\netcoreapp3.1\\bin"
   ],
-  "SelectedNode": "\\MedicalFunctions.cs",
+  "SelectedNode": "\\local.settings.json",
   "PreviewInSolutionExplorer": false
 }

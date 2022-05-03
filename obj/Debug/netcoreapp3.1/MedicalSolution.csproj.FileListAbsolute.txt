@@ -86,13 +86,6 @@ D:\Hackathon\MedicalSolution\obj\Debug\netcoreapp3.1\MedicalSolution.csproj.Core
 D:\Hackathon\MedicalSolution\obj\Debug\netcoreapp3.1\MedicalSolution.csproj.CopyComplete
 D:\Hackathon\MedicalSolution\obj\Debug\netcoreapp3.1\MedicalSolution.dll
 D:\Hackathon\MedicalSolution\obj\Debug\netcoreapp3.1\MedicalSolution.pdb
-D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.csproj.AssemblyReference.cache
-D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.GeneratedMSBuildEditorConfig.editorconfig
-D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.AssemblyInfoInputs.cache
-D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.AssemblyInfo.cs
-D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.csproj.CoreCompileInputs.cache
-D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.dll
-D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.pdb
 D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\bin\Debug\netcoreapp3.1\host.json
 D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\bin\Debug\netcoreapp3.1\local.settings.json
 D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\bin\Debug\netcoreapp3.1\MedicalSolution.deps.json
@@ -173,4 +166,11 @@ D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\bin\Debug\netcoreapp3.1\runtim
 D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.csproj.AssemblyReference.cache
+D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.GeneratedMSBuildEditorConfig.editorconfig
+D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.AssemblyInfoInputs.cache
+D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.AssemblyInfo.cs
+D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.csproj.CoreCompileInputs.cache
 D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.csproj.CopyComplete
+D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.dll
+D:\Hackathon\Medical_AzureRepo\MedicalFunctionApp\obj\Debug\netcoreapp3.1\MedicalSolution.pdb

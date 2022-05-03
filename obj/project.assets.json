@@ -5464,11 +5464,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Hackathon\\MedicalSolution\\MedicalSolution.csproj",
+      "projectUniqueName": "D:\\Hackathon\\Medical_AzureRepo\\MedicalFunctionApp\\MedicalSolution.csproj",
       "projectName": "MedicalSolution",
-      "projectPath": "D:\\Hackathon\\MedicalSolution\\MedicalSolution.csproj",
+      "projectPath": "D:\\Hackathon\\Medical_AzureRepo\\MedicalFunctionApp\\MedicalSolution.csproj",
       "packagesPath": "C:\\Users\\jadhavshi\\.nuget\\packages\\",
-      "outputPath": "D:\\Hackathon\\MedicalSolution\\obj\\",
+      "outputPath": "D:\\Hackathon\\Medical_AzureRepo\\MedicalFunctionApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jadhavshi\\AppData\\Roaming\\NuGet\\NuGet.Config",
