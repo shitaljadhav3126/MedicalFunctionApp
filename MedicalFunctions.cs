@@ -31,12 +31,12 @@ namespace MedicalSolution
                 using (connection)
                 {
                     connection.Open();
-                    if (String.IsNullOrEmpty(input.Name))
-                    {
+                    //if (String.IsNullOrEmpty(input.Name))
+                    //{
                         var query = $"INSERT INTO [MedicineTable] (Name,Count,Location,ProviderType) VALUES('{input.Name}', '{input.Count}' , '{input.Location}' , '{input.ProviderType}')";
                         SqlCommand command = new SqlCommand(query, connection);
                         command.ExecuteNonQuery();
-                    }
+                    //}
                 }
             }
             catch (Exception e)
