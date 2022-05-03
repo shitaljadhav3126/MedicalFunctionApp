@@ -22,10 +22,12 @@ namespace MedicalSolution
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var input = JsonConvert.DeserializeObject<CreateModel>(requestBody);
+            //string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            SqlConnection connection = new SqlConnection(SqlConnectionString)
             try
             {
-                using (SqlConnection connection = new SqlConnection(SqlConnectionString))
+                using (connection)
                 {
                     connection.Open();
                     if (String.IsNullOrEmpty(input.Name))
@@ -41,6 +43,10 @@ namespace MedicalSolution
                 log.LogError(e.ToString());
                 return new BadRequestResult();
             }
+            finally
+            {
+                connection.Close();
+            }
             return new OkResult();
         }
 
@@ -50,11 +56,12 @@ namespace MedicalSolution
         {
             string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             List<MedicalModel> medialmodel = new List<MedicalModel>();
+            SqlConnection connection = new SqlConnection(SqlConnectionString)
             try
             {
-                using (SqlConnection connection = new SqlConnection(SqlConnectionString))
+                using ()
                 {
-                    connection.Open();
+                    connection.Open(connection);
                     var query = @"Select * from MedicineTable";
                     SqlCommand command = new SqlCommand(query, connection);
                     var reader = await command.ExecuteReaderAsync();
@@ -76,6 +83,10 @@ namespace MedicalSolution
             {
                 log.LogError(e.ToString());
             }
+            finally
+            {
+                connection.Close();
+            }
             if (medialmodel.Count > 0)
             {
                 return new OkObjectResult(medialmodel);
@@ -84,6 +95,7 @@ namespace MedicalSolution
             {
                 return new NotFoundResult();
             }
+            
         }
 
         [FunctionName("GetMedicineByName")]
