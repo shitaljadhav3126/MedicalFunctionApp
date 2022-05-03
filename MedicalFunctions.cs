@@ -59,9 +59,9 @@ namespace MedicalSolution
             SqlConnection connection = new SqlConnection(SqlConnectionString);
             try
             {
-                using ()
+                using (connection)
                 {
-                    connection.Open(connection);
+                    connection.Open();
                     var query = @"Select * from MedicineTable";
                     SqlCommand command = new SqlCommand(query, connection);
                     var reader = await command.ExecuteReaderAsync();
