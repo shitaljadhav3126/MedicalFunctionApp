@@ -24,7 +24,7 @@ namespace MedicalSolution
             var input = JsonConvert.DeserializeObject<CreateModel>(requestBody);
             //string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            SqlConnection connection = new SqlConnection(SqlConnectionString)
+            SqlConnection connection = new SqlConnection(SqlConnectionString);
             try
             {
                 using (connection)
@@ -56,7 +56,7 @@ namespace MedicalSolution
         {
             string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             List<MedicalModel> medialmodel = new List<MedicalModel>();
-            SqlConnection connection = new SqlConnection(SqlConnectionString)
+            SqlConnection connection = new SqlConnection(SqlConnectionString);
             try
             {
                 using ()
@@ -104,9 +104,10 @@ namespace MedicalSolution
         {
             string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             DataTable dt = new DataTable();
+            SqlConnection connection = new SqlConnection(SqlConnectionString);
             try
             {
-                using (SqlConnection connection = new SqlConnection(SqlConnectionString))
+                using (connection)
                 {
                     connection.Open();
                     var query = @"Select * from MedicineTable Where name like '%@name%'";
@@ -119,6 +120,10 @@ namespace MedicalSolution
             catch (Exception e)
             {
                 log.LogError(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
             }
             if (dt.Rows.Count == 0)
             {
@@ -134,9 +139,10 @@ namespace MedicalSolution
             string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var input = JsonConvert.DeserializeObject<UpdateModel>(requestBody);
+            SqlConnection connection = new SqlConnection(SqlConnectionString);
             try
             {
-                using (SqlConnection connection = new SqlConnection(SqlConnectionString))
+                using (connection)
                 {
                     connection.Open();
                     var query = @"Update MedicineTable Set Name = @Name , Count = @Count, Location=@Location, ProviderType=@ProviderType  Where Id = @Id";
@@ -151,6 +157,10 @@ namespace MedicalSolution
             catch (Exception e)
             {
                 log.LogError(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
             }
             return new OkResult();
         }
