@@ -52,32 +52,26 @@ namespace MedicalSolution
         //}
 
         [FunctionName("GetUserByNamePass")]
-        public static async Task<IActionResult> GetUserByNamePass(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user")] HttpRequest req, ILogger log, string name, string password)
+        public static IActionResult GetUserByNamePass(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user")] HttpRequest req, ILogger log, string Name, string Password)
         {
             //string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             List<UserModel> Usermodel = new List<UserModel>();
             SqlConnection connection = new SqlConnection(SqlConnectionString);
+            DataTable dt = new DataTable();
+            DataRow[] dr = null;
             try
             {
                 using (connection)
                 {
                     connection.Open();
-                    var query = @"Select * from UserTable Where name = '@name' and Password= '@Password'";
+                    var query = @"Select * from UserTable";
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@name", name);
-                    command.Parameters.AddWithValue("@Password", password);
-                    var reader = await command.ExecuteReaderAsync();
-                    while (reader.Read())
-                    {
-                        UserModel task = new UserModel()
-                        {
-                            
-                            Name = reader["Name"].ToString(),                           
-                            Password = reader["Location"].ToString()                           
-                        };
-                        Usermodel.Add(task);
-                    }
+                    //command.Parameters.AddWithValue("@name", name);
+                    //command.Parameters.AddWithValue("@Password", password);
+                    SqlDataAdapter da = new SqlDataAdapter(command);
+                    da.Fill(dt);
+                    dr = dt.Select("name='"+ Name + "' , Password='"+ Password +"'");                
                 }
             }
             catch (Exception e)
@@ -87,16 +81,12 @@ namespace MedicalSolution
             finally
             {
                 connection.Close();
-            }
-            if (Usermodel.Count > 0)
-            {
-                return new OkObjectResult(Usermodel);
-            }
-            else
+            }            
+            if (dr.Length == 0)
             {
                 return new NotFoundResult();
             }
-            
+            return new OkObjectResult(dr);            
         }
 
         //[FunctionName("GetMedicineByName")]
