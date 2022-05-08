@@ -176,6 +176,46 @@ namespace MedicalSolution
             return new OkObjectResult(dt);
         }
 
+
+        [FunctionName("GetMedicineByNameBatchID")]
+        public static IActionResult GetMedicineByNameBatchID(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "medicinebynamebatchid/{name}/{batchid}")] HttpRequest req, ILogger log, string name, string batchid)
+        {
+            //DataRow dr[
+           // string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            DataTable dt = new DataTable();
+            DataRow[] dr= new DataRow[0];
+            SqlConnection connection = new SqlConnection(SqlConnectionString);
+            try
+            {
+                using (connection)
+                {
+                    connection.Open();
+                    var query = @"Select * from MedicineTable";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    //command.Parameters.AddWithValue("@name", name);
+                    SqlDataAdapter da = new SqlDataAdapter(command);
+                    da.Fill(dt);
+                    dt = dt.Select("name like '%"+ name +"%' and BatchID like '%"+ batchid +"%'").CopyToDataTable();
+                }
+            }
+            catch (Exception e)
+            {
+                log.LogError(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+            if (dt.Rows.Count == 0)
+            {
+                return new NotFoundResult();
+            }
+            return new OkObjectResult(dt);
+        }
+
+
+
         [FunctionName("UpdateMedicine")]
         public static async Task<IActionResult> UpdateMedicine(
         [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "medicine/{id}")] HttpRequest req, ILogger log, int id)
