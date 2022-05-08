@@ -273,7 +273,7 @@ namespace MedicalSolution
                     //command.Parameters.AddWithValue("@Password", password);
                     SqlDataAdapter da = new SqlDataAdapter(command);
                     da.Fill(dt);
-                    dr = dt.Select("name='" + Name + "' and Password='" + Password + "'");
+                    dt = (dt.Select("name='" + Name + "' and Password='" + Password + "'")).CopyToDataTable();
                 }
             }
             catch (Exception e)
@@ -284,13 +284,13 @@ namespace MedicalSolution
             {
                 connection.Close();
             }
-            if (dr.Length == 0)
+            if (dt.Rows.Count == 0)
             {
                 return new NotFoundResult();
             }
             else
             {
-                return new OkObjectResult(dr);
+                return new OkObjectResult(dt);
             }
         }
     }
