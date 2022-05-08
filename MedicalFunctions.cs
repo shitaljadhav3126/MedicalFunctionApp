@@ -103,21 +103,62 @@ namespace MedicalSolution
 
         [FunctionName("GetMedicineByName")]
         public static IActionResult GetMedicineByName(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "medicine/{name}")] HttpRequest req, ILogger log, string name)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "medicinebyname/{name}")] HttpRequest req, ILogger log, string name)
         {
+            //DataRow dr[
            // string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             DataTable dt = new DataTable();
+            DataRow[] dr= new DataRow[0];
             SqlConnection connection = new SqlConnection(SqlConnectionString);
             try
             {
                 using (connection)
                 {
                     connection.Open();
-                    var query = @"Select * from MedicineTable Where name like '%@name%'";
+                    var query = @"Select * from MedicineTable";
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@name", name);
+                    //command.Parameters.AddWithValue("@name", name);
                     SqlDataAdapter da = new SqlDataAdapter(command);
                     da.Fill(dt);
+                    dt = dt.Select("name like '%"+ name +"%'").CopyToDataTable();
+                }
+            }
+            catch (Exception e)
+            {
+                log.LogError(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+            if (dt.Rows.Count == 0)
+            {
+                return new NotFoundResult();
+            }
+            return new OkObjectResult(dt);
+        }
+
+
+        [FunctionName("GetMedicineByBatchID")]
+        public static IActionResult GetMedicineByBatchID(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "medicinebybatch/{BatchID}")] HttpRequest req, ILogger log, string BatchID)
+        {
+            //DataRow dr[
+           // string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            DataTable dt = new DataTable();
+            DataRow[] dr= new DataRow[0];
+            SqlConnection connection = new SqlConnection(SqlConnectionString);
+            try
+            {
+                using (connection)
+                {
+                    connection.Open();
+                    var query = @"Select * from MedicineTable";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    //command.Parameters.AddWithValue("@name", name);
+                    SqlDataAdapter da = new SqlDataAdapter(command);
+                    da.Fill(dt);
+                    dt = dt.Select("BatchID like '%"+ BatchID +"%'").CopyToDataTable();
                 }
             }
             catch (Exception e)
@@ -168,6 +209,49 @@ namespace MedicalSolution
                 connection.Close();
             }
             return new OkResult();
+        }
+    
+
+
+        [FunctionName("GetUserByNamePass")]
+        public static IActionResult GetUserByNamePass(
+           [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user/{name}/{password}")] HttpRequest req, ILogger log, string Name, string Password)
+        {
+            //string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            List<UserModel> Usermodel = new List<UserModel>();
+            SqlConnection connection = new SqlConnection(SqlConnectionString);
+            DataTable dt = new DataTable();
+            DataRow[] dr = null;
+            try
+            {
+                using (connection)
+                {
+                    connection.Open();
+                    var query = @"Select * from UserTable";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    //command.Parameters.AddWithValue("@name", name);
+                    //command.Parameters.AddWithValue("@Password", password);
+                    SqlDataAdapter da = new SqlDataAdapter(command);
+                    da.Fill(dt);
+                    dr = dt.Select("name='" + Name + "' and Password='" + Password + "'");
+                }
+            }
+            catch (Exception e)
+            {
+                log.LogError(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+            if (dr.Length == 0)
+            {
+                return new NotFoundResult();
+            }
+            else
+            {
+                return new OkObjectResult(dr);
+            }
         }
     }
 }

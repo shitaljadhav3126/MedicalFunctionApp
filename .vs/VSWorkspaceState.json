@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\bin\\Release",
-    "\\bin\\Release\\netcoreapp3.1",
-    "\\bin\\Release\\netcoreapp3.1\\bin"
+    ""
   ],
-  "SelectedNode": "\\local.settings.json",
+  "SelectedNode": "\\UserFunctions.cs",
   "PreviewInSolutionExplorer": false
 }

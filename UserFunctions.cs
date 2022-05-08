@@ -15,8 +15,49 @@ namespace MedicalSolution
 {   
     public static class UserFunctions
     {
-        static string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        //static string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         
+        //[FunctionName("GetUserByNamePass")]
+        //public static async Task<IActionResult> GetUserByNamePass(
+        //   [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user/${name}/${password}")] HttpRequest req, ILogger log, string Name, string Password)
+        //{
+        //    //string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        //    List<UserModel> Usermodel = new List<UserModel>();
+        //    SqlConnection connection = new SqlConnection(SqlConnectionString);
+        //    DataTable dt = new DataTable();
+        //    DataRow[] dr = null;
+        //    try
+        //    {
+        //        using (connection)
+        //        {
+        //            connection.Open();
+        //            var query = @"Select * from UserTable";
+        //            SqlCommand command = new SqlCommand(query, connection);
+        //            //command.Parameters.AddWithValue("@name", name);
+        //            //command.Parameters.AddWithValue("@Password", password);
+        //            SqlDataAdapter da = new SqlDataAdapter(command);
+        //            da.Fill(dt);
+        //            dr = dt.Select("name='" + Name + "' , Password='" + Password + "'");
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        log.LogError(e.ToString());
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+        //    if (dr.Length == 0)
+        //    {
+        //        return new NotFoundResult();
+        //    }
+        //    else
+        //    {
+        //        return new OkObjectResult(dr);
+        //    }
+        //}
+
         //[FunctionName("RegisterUser")]
         //public static async Task<IActionResult> RegisterUser(
         //     [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "RegisterUser")] HttpRequest req, ILogger log)
@@ -24,7 +65,7 @@ namespace MedicalSolution
         //    string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
         //    var input = JsonConvert.DeserializeObject<CreateModel>(requestBody);
         //    //string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        //   // string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        //    // string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         //    SqlConnection connection = new SqlConnection(SqlConnectionString);
         //    try
         //    {
@@ -33,9 +74,9 @@ namespace MedicalSolution
         //            connection.Open();
         //            //if (String.IsNullOrEmpty(input.Name))
         //            //{
-        //                var query = $"INSERT INTO [UserTable] (Name,Count,Location,ProviderType, StoreName,BatchID) VALUES('{input.Name}', '{input.Count}' , '{input.Location}' , '{input.ProviderType}' , '{input.StoreName}' , '{input.BatchID}')";
-        //                SqlCommand command = new SqlCommand(query, connection);
-        //                command.ExecuteNonQuery();
+        //            var query = $"INSERT INTO [UserTable] (Name,Count,Location,ProviderType, StoreName,BatchID) VALUES('{input.Name}', '{input.Count}' , '{input.Location}' , '{input.ProviderType}' , '{input.StoreName}' , '{input.BatchID}')";
+        //            SqlCommand command = new SqlCommand(query, connection);
+        //            command.ExecuteNonQuery();
         //            //}
         //        }
         //    }
@@ -51,43 +92,7 @@ namespace MedicalSolution
         //    return new OkResult();
         //}
 
-        [FunctionName("GetUserByNamePass")]
-        public static IActionResult GetUserByNamePass(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user")] HttpRequest req, ILogger log, string Name, string Password)
-        {
-            //string SqlConnectionString ="Server=tcp:medicinesystem.database.windows.net,1433;Initial Catalog=MedicineSystem;Persist Security Info=False;User ID=shital;Password=Fujitsu@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            List<UserModel> Usermodel = new List<UserModel>();
-            SqlConnection connection = new SqlConnection(SqlConnectionString);
-            DataTable dt = new DataTable();
-            DataRow[] dr = null;
-            try
-            {
-                using (connection)
-                {
-                    connection.Open();
-                    var query = @"Select * from UserTable";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    //command.Parameters.AddWithValue("@name", name);
-                    //command.Parameters.AddWithValue("@Password", password);
-                    SqlDataAdapter da = new SqlDataAdapter(command);
-                    da.Fill(dt);
-                    dr = dt.Select("name='"+ Name + "' , Password='"+ Password +"'");                
-                }
-            }
-            catch (Exception e)
-            {
-                log.LogError(e.ToString());
-            }
-            finally
-            {
-                connection.Close();
-            }            
-            if (dr.Length == 0)
-            {
-                return new NotFoundResult();
-            }
-            return new OkObjectResult(dr);            
-        }
+
 
         //[FunctionName("GetMedicineByName")]
         //public static IActionResult GetMedicineByName(

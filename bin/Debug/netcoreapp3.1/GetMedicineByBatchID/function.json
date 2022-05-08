@@ -4,7 +4,7 @@
   "bindings": [
     {
       "type": "httpTrigger",
-      "route": "user/{name}/{password}",
+      "route": "medicinebybatch/{BatchID}",
       "methods": [
         "get"
       ],
@@ -14,5 +14,5 @@
   ],
   "disabled": false,
   "scriptFile": "../bin/MedicalSolution.dll",
-  "entryPoint": "MedicalSolution.MedicalFunctions.GetUserByNamePass"
+  "entryPoint": "MedicalSolution.MedicalFunctions.GetMedicineByBatchID"
 }
